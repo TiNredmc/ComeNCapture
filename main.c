@@ -43,8 +43,7 @@ void TIM4init(uint8_t arrVal, uint8_t pscrVal){
 
 /* Interrupt handler for TIM4 */
 void TIM4isr(void) __interrupt(25){// the interrupt vector is 25 (from the STM8L151F36U datasheet page 49)
-	uint8_t pinread = PB_IDR;
-	USART1_DR = pinread;
+	USART1_DR = (uint8_t)PB_IDR;
     	while (!(USART1_SR & (1 << USART1_SR_TC)));
 	/*TIM4_ITClearPendingBit()*/
 	TIM4_SR = (uint8_t)~0x01;
